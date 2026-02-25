@@ -247,6 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a7e466631ba2b48ab4ea0cdcb1990d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBehavior
-  jumpForce: 8
+  jumpForce: 10
   jumpInterval: 3
   scissors: {fileID: 3864790078117033737, guid: 945733b484aab8846bf5c2494e72c6ea, type: 3}

@@ -1,11 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// ScissorsBehavior
-/// - On spawn, picks a random direction and moves at a constant speed.
-/// - On collision with an object tagged "Rock", spawns a Rock prefab at this position,
-///   then destroys itself.
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class ScissorsBehavior : MonoBehaviour
 {
@@ -16,7 +10,6 @@ public class ScissorsBehavior : MonoBehaviour
     [SerializeField] private GameObject paper;
 
     private Rigidbody2D _rb;
-    private Vector2 _moveDir;
 
     private void OnEnable()
     {
@@ -27,7 +20,7 @@ public class ScissorsBehavior : MonoBehaviour
     {
         InstanceNumberManager.UnregisterInstance();
     }
-    
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -35,16 +28,14 @@ public class ScissorsBehavior : MonoBehaviour
 
     private void Start()
     {
-        _moveDir = Random.insideUnitCircle;
-        if (_moveDir.sqrMagnitude < 0.0001f)
-            _moveDir = Vector2.right;
-
-        _moveDir = _moveDir.normalized;
+        float randomAngle = Random.Range(0f, 360f);
+        transform.rotation = Quaternion.Euler(0f, 0f, randomAngle);
     }
 
     private void FixedUpdate()
     {
-        _rb.linearVelocity = _moveDir * speed;
+        Vector2 moveDir = -transform.up;
+        _rb.linearVelocity = moveDir * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,6 +48,7 @@ public class ScissorsBehavior : MonoBehaviour
             Destroy(transform.parent.gameObject);
             return;
         }
-        _moveDir = -_moveDir;
+
+        transform.Rotate(0f, 0f, 180f);
     }
 }
