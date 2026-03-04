@@ -7,6 +7,7 @@ TagManager:
   - Scissors
   - Paper
   - Rock
+  - Wall
   layers:
   - Default
   - TransparentFX
