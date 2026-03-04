@@ -25,7 +25,11 @@ public sealed class ScissorsNormalState : UnitBaseState
     {
         if (other.CompareTag("Paper"))
         {
-            _agent.RegisterPaperKill();
+            PaperAgent paperAgent = other.GetComponent<PaperAgent>();
+            if (paperAgent != null && paperAgent.CurrentState != PaperAgent.State.Boss)
+            {
+                _agent.RegisterPaperKill();
+            }
             return;
         }
 
